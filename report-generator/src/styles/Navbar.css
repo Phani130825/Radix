@@ -1,31 +1,66 @@
+/* General Navbar Styling */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: #2c3e50;
+    background-color: #2d2d2d;
+    padding: 2rem 2rem;
     color: white;
+    font-family: Arial, sans-serif;
   }
   
-  .navbar .logo {
-    font-size: 1.5rem;
+  /* Logo Styling */
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
     font-weight: bold;
   }
   
+  .logo .chest {
+    color: #d3d3d3; /* Light Gray */
+    margin-right: 0.2rem;
+  }
+  
+  .logo .xpert {
+    color: #d32f2f; /* Red */
+  }
+  
+  /* Navigation Links */
   .nav-links {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
+    margin: 0;
   }
   
-  .nav-links a {
+  .nav-links li a {
     color: white;
     text-decoration: none;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
   }
   
-  .nav-links a:hover {
-    text-decoration: underline;
+  .nav-links li a:hover {
+    color: #bdbdbd; /* Light Hover Effect */
+  }
+  
+  /* Try Now Button */
+  .try-now-btn a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    color: #8b0000; /* Dark Red */
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1.2rem;
+  }
+  
+  .try-now-btn a:hover {
+    background-color: #d32f2f;
+    color: white;
   }
   
 

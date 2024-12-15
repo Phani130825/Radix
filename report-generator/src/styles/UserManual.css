@@ -1,0 +1,79 @@
+/* General Container Styling */
+.user-manual-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+  }
+  
+  .manual-title {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  /* Step Layout */
+  .manual-step {
+    display: flex;
+    justify-content: space-between; /* Ensures space between content and video */
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  /* Step Icon Styling */
+  .step-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e74c3c;
+    color: #ffffff;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: center;
+    margin-right: 20px;
+  }
+  
+  .step-icon h2 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  /* Step Content */
+  .step-content {
+    flex: 1; /* Takes available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .step-content h3 {
+    color: #333;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+  }
+  
+  .step-content p {
+    color: #666;
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  
+  /* Video Styling */
+  .step-video {
+    align-self: flex-end;
+    flex-shrink: 0; /* Prevents the video from resizing */
+    width: 40%; /* Video takes up 40% of the card width */
+    max-width: 400px; /* Optional: limits video size */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  

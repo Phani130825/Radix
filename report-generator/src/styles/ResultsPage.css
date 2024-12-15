@@ -1,0 +1,99 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    background-color: #ffffff;
+    overflow-x: hidden;
+  }
+  
+  /* Sticky Header Section */
+  .results-header {
+    
+    top: 0;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    color: darkred;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+  
+  .results-header h1 {
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  
+  .results-header p {
+    color: #333;
+    font-size: 1.2rem;
+    max-width: 700px;
+    line-height: 1.6;
+  }
+  
+  /* Results Container */
+  .results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin: 50px auto;
+    width: 90%;
+    max-width: 1200px;
+  }
+  
+  /* Individual Section */
+  .results-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    opacity: 0; /* Hidden by default */
+    transform: translateX(50%); /* Moved out of view */
+    transition: opacity 0.8s ease-out, transform 1s ease-out;
+  }
+  
+  .results-section img {
+    width: 50%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .results-section .content {
+    flex: 1;
+    text-align: justify;
+  }
+  
+  .results-section h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .results-section p {
+    font-size: 1.1rem;
+    color: #333; /* Updated to lighter color */
+    line-height: 1.8;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .results-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .results-section img {
+      width: 100%;
+    }
+  }
+  
+  /* Triggered Animation */
+  .results-section.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
