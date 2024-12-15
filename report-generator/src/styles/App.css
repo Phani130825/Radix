@@ -1,10 +1,17 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
   }
-  .container {
-    max-width: 1200px;
-    margin: auto;
+  
+  .App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
+  
+  main {
+    flex: 1;
+  }
+  

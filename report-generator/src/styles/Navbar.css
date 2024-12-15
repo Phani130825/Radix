@@ -1,51 +1,31 @@
-/* Navbar.css */
-
-.navbar-custom {
-    background-color: #212529; /* Modern dark background */
-    padding: 0.75rem 1rem;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #2c3e50;
+    color: white;
   }
   
-  .navbar-brand {
-    color: #ffffff;
+  .navbar .logo {
+    font-size: 1.5rem;
     font-weight: bold;
-    text-transform: uppercase;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
     font-size: 1.25rem;
   }
   
-  .nav-link {
-    color: #ffffff;
-    margin: 0 1rem;
-    font-size: 1rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    color: #17a2b8; /* Highlight color on hover */
-    transform: scale(1.05);
-  }
-  
-  .navbar-toggler {
-    border: none;
-  }
-  
-  .navbar-toggler-icon {
-    background-color: #ffffff;
-  }
-  
-  .collapse.navbar-collapse {
-    justify-content: flex-end;
-  }
-  
-  .navbar-nav {
-    flex-direction: row;
-  }
-  
-  .nav-item {
-    list-style: none;
-  }
-  
-  .nav-link.active {
-    color: #17a2b8 !important;
+  .nav-links a:hover {
+    text-decoration: underline;
   }
   
 
