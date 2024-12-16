@@ -30,8 +30,17 @@
 .nav-links {
     list-style: none;
     display: flex;
+    align-items: center;
     gap: 2rem;
     margin: 0;
+    padding: 0;
+    flex: 1; /* Allows the links to take equal space */
+    justify-content: center; /* Centers the links horizontally */
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center; /* Centers the text vertically */
 }
 
 .nav-links li a {
@@ -79,6 +88,5 @@
         padding: 0.5rem 1rem;
     }
 }
-
 
   
