@@ -30,12 +30,12 @@
 .nav-links {
     list-style: none;
     display: flex;
-    align-items: center;
+    align-items: right;
     gap: 2rem;
     margin: 0;
     padding: 0;
     flex: 1; /* Allows the links to take equal space */
-    justify-content: center; /* Centers the links horizontally */
+    justify-content: right; /* Centers the links horizontally */
 }
 
 .nav-links li {
@@ -72,6 +72,13 @@
     color: white;
 }
 
+.logo img {
+    width: 2rem; /* Adjust the size to match the height of the text */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 0.5rem; /* Add spacing between the icon and the text */
+    vertical-align: middle; /* Align the icon with the text */
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
     .nav-links {
@@ -88,5 +95,6 @@
         padding: 0.5rem 1rem;
     }
 }
+
 
   

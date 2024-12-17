@@ -37,7 +37,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <nav className="navbar">
+      
       <div className="logo">
+      <img src="/1000056406.png" alt="Description of the image" />
         <span className="chest">RaD</span>
         <span className="xpert">iX_</span>
       </div>

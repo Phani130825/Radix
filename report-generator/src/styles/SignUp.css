@@ -7,12 +7,15 @@
   height: 100vh;
   background-color: #f4f4f4;
   padding: 40px 40px 40px 40px;
+  margin-left: 100px;
+
 }
 
 .auth-container h2 {
   font-size: 1.7rem;
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  margin-right: 90px;
 }
 
 .auth-form {
@@ -111,8 +114,12 @@
 }
 
 .form-group{
-  padding-left: 25px;
+  padding-left: 0px;
 }
 .form-group #p{
   text-align: center;
+}
+
+label{
+  padding-left: 25px;
 }

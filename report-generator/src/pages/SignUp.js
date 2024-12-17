@@ -317,10 +317,11 @@ const SignUp = ({ setIsLoggedIn }) => {
             required
           />
         </div>
-        <h3 className="questionnaire-heading">Medical Background Questionnaire</h3>
+        
         {isSignUp && (
-          
           <div className="questionnaire">
+          <h3 className="questionnaire-heading">Medical Background Questionnaire</h3>
+
             {questions.map((question, index) => (
               <div key={index} className="form-group">
                 <label className='questions'>{question}</label>
@@ -348,6 +349,7 @@ const SignUp = ({ setIsLoggedIn }) => {
                 </div>
               </div>
             ))}
+          
           </div>
         )}
 

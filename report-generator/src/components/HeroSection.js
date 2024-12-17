@@ -6,7 +6,7 @@ const HeroSection = () => {
     <section className="hero-section">
       <h1>Welcome to Radix</h1>
       <p>Generate insightful reports with ease and efficiency.</p>
-      <button className="cta-button">Get Started</button>
+      <button className="cta-button" >Get Started</button>
     </section>
   );
 };

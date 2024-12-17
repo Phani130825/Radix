@@ -1,6 +1,7 @@
 .container {
     text-align: center;
     margin: 20px auto;
+    margin-bottom: 180px;
   }
   
   .stage-bar {
@@ -59,6 +60,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    align-self: center;
+    
   }
   
   button:hover {
