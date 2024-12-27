@@ -7,6 +7,7 @@
     padding: 2rem;
     color: white;
     font-family: Arial, sans-serif;
+    position: relative; /* Necessary for absolute positioning of the underline */
 }
 
 /* Logo Styling */
@@ -41,6 +42,7 @@
 .nav-links li {
     display: flex;
     align-items: center; /* Centers the text vertically */
+    position: relative; /* Necessary for underline position */
 }
 
 .nav-links li a {
@@ -48,10 +50,33 @@
     text-decoration: none;
     font-size: 1.2rem;
     transition: color 0.3s ease;
+    padding-bottom: 0.5rem; /* Space for the underline effect */
 }
 
 .nav-links li a:hover {
     color: #bdbdbd; /* Light Hover Effect */
+}
+
+/* Underline Effect */
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background-color: #fff; /* Red color */
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+    width: 100%; /* Full width underline on hover */
+}
+
+/* Active Link Styling (Optional, if you want to visually indicate the current page) */
+.nav-links li a.active::after {
+    width: 100%; /* Full width underline on active */
 }
 
 /* Try Now Button */
@@ -95,6 +120,3 @@
         padding: 0.5rem 1rem;
     }
 }
-
-
-  

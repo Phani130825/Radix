@@ -23,7 +23,6 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   const filePath = path.join(__dirname, "uploads", req.file.filename);
 
   try {
-    // Send the uploaded image to the Python Flask API
     const formData = new FormData();
     formData.append("file", fs.createReadStream(filePath));
 
@@ -31,10 +30,8 @@ app.post("/upload", upload.single("file"), async (req, res) => {
       headers: formData.getHeaders(),
     });
 
-    // Delete the file after prediction
-    fs.unlinkSync(filePath);
+    fs.unlinkSync(filePath); // Clean up uploaded file
 
-    // Respond with the prediction result
     res.json({
       prediction: response.data.prediction,
       file: req.file.filename,
@@ -42,15 +39,15 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   } catch (error) {
     console.error("Error during prediction:", error.message || error.response?.data || error);
     res.status(500).json({
-      error: "Prediction failed.",
-      details: error.response?.data || error.message,
+      error: error.response?.data?.error || error.message || "Prediction failed.",
     });
   }
 });
 
+
 // Start the server
-app.listen(5001, () => {
-  console.log("Node.js server running on port 5001");
+app.listen(5002, () => {
+  console.log("Node.js server running on port 5002");
   console.log("Ensure that Flask server is running on port 5000");
 });
 

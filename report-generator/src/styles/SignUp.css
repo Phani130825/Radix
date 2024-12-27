@@ -8,6 +8,7 @@
   background-color: #f4f4f4;
   padding: 40px 40px 40px 40px;
   margin-left: 100px;
+  size: 50%;
 
 }
 
@@ -100,7 +101,7 @@
 }
 
 .questionnaire {
-  max-height: 300px; /* Set a specific height for the container */
+  max-height: 150px; /* Set a specific height for the container */
   overflow-y: auto;  /* Enables vertical scrolling */
   padding-right: 10px; /* Adds space for the scrollbar */
   border: 1px solid #ccc; /* Optional: adds a border to distinguish the container */
@@ -122,4 +123,58 @@
 
 label{
   padding-left: 25px;
+}
+
+/* Stylish scrollbar for form-group and questionnaire */
+.form-group,
+.questionnaire {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #007bff #f4f4f4; /* For Firefox */
+}
+
+.form-group::-webkit-scrollbar,
+.questionnaire::-webkit-scrollbar {
+  width: 7px;
+}
+
+.form-group::-webkit-scrollbar-thumb,
+.questionnaire::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Thumb color */
+  border-radius: 4px; /* Rounded corners */
+  border: 2px solid #f4f4f4; /* Adds space between the thumb and track */
+}
+
+.form-group::-webkit-scrollbar-track,
+.questionnaire::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Track background color */
+  border-radius: 4px; /* Rounded corners */
+  border: 1px solid #ccc; /* Optional: adds a border for a posh look */
+}
+
+.form-group::-webkit-scrollbar-thumb:hover,
+.questionnaire::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.scrollable-container {
+  max-height: 100px; /* Adjust height as needed */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  margin-bottom: 1.5rem; /* Space below the container */
+  border: 1px solid #ccc; /* Optional: adds a border for clarity */
+  padding: 10px; /* Adds padding for better appearance */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #007bff #f4f4f4; /* For Firefox */
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Thumb color */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Track background color */
 }

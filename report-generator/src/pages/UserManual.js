@@ -1,21 +1,22 @@
 import React from 'react';
 import '../styles/UserManual.css';
 
+
 const UserManual = () => {
   const steps = [
-    { step: 1, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', video: 'video1.mp4' },
-    { step: 2, text: 'Suspendisse euismod, nisl eget luctus laoreet, enim velit varius justo.', video: 'video2.mp4' },
-    { step: 3, text: 'Phasellus aliquam nunc sit amet erat bibendum, non cursus nisi posuere.', video: 'video3.mp4' },
-    { step: 4, text: 'Curabitur vel urna eget libero ultricies facilisis at nec justo.', video: 'video4.mp4' },
-    { step: 5, text: 'Mauris placerat ipsum in urna tincidunt, vel condimentum purus convallis.', video: 'video5.mp4' },
-    { step: 6, text: 'Aenean tincidunt ligula eget risus ullamcorper ultricies.', video: 'video6.mp4' },
+    { step: 1, phase: 'Login' , text: 'Click on Get started button to sign up / log in', video: '/v1.mp4' },
+    { step: 2,phase: 'Fill Up' , text: 'Fill up the details and log in', video: '/v2.mp4' },
+    { step: 3, phase: 'Analyse' ,text: 'Select the image & click on Submit/Analyse button', video: '/v3.mp4' },
+    { step: 4, phase: 'Store Report' ,text: 'Save the report', video: '/v4.mp4' },
+    { step: 5,phase: 'View Reports' , text: 'Navigate to View Reports to view & download your reports', video: '/v5.mp4' },
+    { step: 6, phase: 'Download Reports' ,text: 'Click on download pdf to save the report in PDF format', video: '/v6.mp4' },
   ];
 
   return (
     <div className="user-manual-container">
       <h1 className="manual-title">Radix: User Manual</h1>
       <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem fugiat beatae totam fuga quisquam quidem ratione laudantium iure optio nesciunt doloremque quis tempore commodi illum quibusdam, omnis maxime, quia id?
+      Follow the below steps to generate report of your x-ray 
       </p>
       {steps.map((item) => (
         <div key={item.step} className="manual-step">
@@ -24,8 +25,9 @@ const UserManual = () => {
             <h2>{item.step}</h2>
           </div>
           <div className="step-content">
-            <h3>Step {item.step}</h3>
+            <h3>{item.phase}</h3>
             <p>{item.text}</p>
+          
             <video
               src={item.video}
               autoPlay

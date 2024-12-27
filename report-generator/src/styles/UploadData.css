@@ -69,8 +69,45 @@
   }
   
   .export-stage img {
-    margin: 10px 0;
+    margin: 0px 0px;
   }
 
+  .report-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 300px;
+  }
+  
+  .report-stage h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .report-stage p {
+    color: #555;
+    font-size: 1em;
+    margin-bottom: 15px;
+  }
+  
+  .report-stage button {
+    padding: 10px 20px;
+    background-color: #ff4b2b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .report-stage button:hover {
+    background-color: #ff416c;
+  }
   
   

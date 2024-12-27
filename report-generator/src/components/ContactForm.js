@@ -220,22 +220,22 @@ const ContactForm = () => {
           <div className="team-member">
             <img src="/1000056406.png" alt="Sai Vathsal" />
             <h3>Sai Vathsal</h3>
-            <p>vathsal@gmail.com</p>
+            
           </div>
           <div className="team-member">
             <img src="/1000056406.png" alt=" Phani " />
             <h3>Phani Datta </h3>
-            <p>1308phanidattakandukuri@gmail.com</p>
+            
           </div>
           <div className="team-member">
             <img src="/1000056406.png" alt="Rohith" />
             <h3>Rohith</h3>
-            <p>Rohith@gmail.com</p>
+           
           </div>
           <div className="team-member">
             <img src="/1000056406.png" alt="Nishanth" />
             <h3>Nishanth</h3>
-            <p>nishanth@gmail.com</p>
+            
           </div>
           
         </div>

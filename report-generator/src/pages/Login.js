@@ -69,38 +69,44 @@
 // export default Login;
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Login.css';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import '../styles/SignUp.css';
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, setEmail }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const db = getFirestore();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+    try {
+      const userDocRef = doc(db, "login", formData.email);
+      const userDoc = await getDoc(userDocRef);
 
-    // Check if email and password match
-    const user = users.find(
-      (user) => user.email === formData.email && user.password === formData.password
-    );
+      if (!userDoc.exists() || userDoc.data().password !== formData.password) {
+        setError("Invalid email or password.");
+        return;
+      }
 
-    if (user) {
+      const userType = userDoc.data().userType;
+      setEmail(formData.email); // Persist email
       setIsLoggedIn(true);
-      navigate('/upload-data');
-    } else {
-      setError('Invalid email or password.');
+      navigate("/upload-data", { state: { role: userType } }); // Pass role
+    } catch (err) {
+      console.error("Error interacting with Firestore:", err);
+      setError("An error occurred. Please try again.");
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit} className="login-form">
+    <div className="auth-container">
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit} className="auth-form">
         {error && <p className="error">{error}</p>}
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -124,11 +130,22 @@ const Login = ({ setIsLoggedIn }) => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Sign In</button>
-        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+        <div className="button-group">
+          <button type="submit" className="btn-primary">
+            Login
+          </button>
+        </div>
+        <p>
+          Don't have an account?{' '}
+          <span className="toggle-auth" onClick={() => navigate('/signup')}>
+            Sign Up
+          </span>
+        </p>
       </form>
     </div>
   );
 };
 
 export default Login;
+
+

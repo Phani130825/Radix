@@ -1,14 +1,18 @@
-  /* Footer.css */
-  .footer {
-    background-color: #343a40; /* Dark background */
-    color: #ffffff;
-    text-align: center;
-    padding: 1rem 0;
-    font-size: 1rem; /* Medium text size */
-  }
-  
-  .footer p {
-    margin: 0;
-    text-align: center;
-    font-weight: 500;
-  }
+/* Footer.css */
+.footer {
+  position: fixed; /* Fixed position */
+  bottom: 0; /* Stick to the bottom of the viewport */
+  width: 100%; /* Span the full width of the page */
+  background-color: #343a40; /* Dark background */
+  color: #ffffff; /* White text */
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1rem; /* Medium text size */
+  z-index: 1000; /* Ensures it stays on top of other content */
+}
+
+.footer p {
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+}

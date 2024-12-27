@@ -1,5 +1,6 @@
 import React from "react";
 import '../styles/About.css';
+import videoFile from '../assets/1226.mp4';
 
 const About = () => {
   return (
@@ -9,7 +10,7 @@ const About = () => {
       
       <div className="video-card">
         <video controls>
-          <source src="path/to/video1.mp4" type="video/mp4" />
+          <source src={videoFile} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <h3>Cutting-edge Imaging Techniques</h3>
