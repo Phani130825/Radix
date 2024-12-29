@@ -213,27 +213,43 @@ const ContactForm = () => {
       </form>
       {status && <p className="status-message">{status}</p>}
 
+
+      <div className="team-section-head">
+
+        <h2>Our Mentor</h2>
+        <div className="team-grid-head">
+          <div className="team-member">
+            <img src="/1000056406.png" alt="Kamal Vijetha" />
+            <h3>Kamal Vijetha Ma'am</h3>
+            
+          </div>
+        </div>
+
+      </div>
+      
+
       {/* Team Section */}
       <div className="team-section">
         <h2>Our Team</h2>
         <div className="team-grid">
           <div className="team-member">
-            <img src="/1000056406.png" alt="Sai Vathsal" />
-            <h3>Sai Vathsal</h3>
+            <img src="/t1.jpg" alt="Phani" />
+            <h3>Phani</h3>
             
           </div>
           <div className="team-member">
-            <img src="/1000056406.png" alt=" Phani " />
-            <h3>Phani Datta </h3>
+            <img src="/t3.png" alt="Sai Vathsal" />
+            <h3>Sai Vathsal </h3>
             
           </div>
+          
           <div className="team-member">
-            <img src="/1000056406.png" alt="Rohith" />
+            <img src="/t2.jpg" alt="Rohith" />
             <h3>Rohith</h3>
            
           </div>
           <div className="team-member">
-            <img src="/1000056406.png" alt="Nishanth" />
+            <img src="/t4.png" alt="Nishanth" />
             <h3>Nishanth</h3>
             
           </div>

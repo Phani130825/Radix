@@ -245,3 +245,21 @@
 .team-member.expanded .expand-btn {
   display: none; /* Hide when expanded */
 }
+
+
+.team-section-head {
+  margin-top: 50px;
+  text-align: center;
+  align-content: center;
+}
+
+.team-section-head h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.team-grid-head{
+  align-items: center;
+  margin-left: 280px;
+}
