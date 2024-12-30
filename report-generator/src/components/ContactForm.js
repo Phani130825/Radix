@@ -219,7 +219,7 @@ const ContactForm = () => {
         <h2>Our Mentor</h2>
         <div className="team-grid-head">
           <div className="team-member">
-            <img src="/1000056406.png" alt="Kamal Vijetha" />
+            <img src="/m1.jpg" alt="Kamal Vijetha" />
             <h3>Kamal Vijetha Ma'am</h3>
             
           </div>
