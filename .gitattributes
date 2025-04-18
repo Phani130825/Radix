@@ -1,0 +1,13 @@
+public/**/*.doc filter=lfs diff=lfs merge=lfs -text
+package-lock.json filter=lfs diff=lfs merge=lfs -text
+public/**/*.pdf filter=lfs diff=lfs merge=lfs -text
+public/**/*.xlsx filter=lfs diff=lfs merge=lfs -text
+public/**/*.gif filter=lfs diff=lfs merge=lfs -text
+public/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.log filter=lfs diff=lfs merge=lfs -text
+public/**/*.docx filter=lfs diff=lfs merge=lfs -text
+public/**/*.xls filter=lfs diff=lfs merge=lfs -text
+public/**/*.png filter=lfs diff=lfs merge=lfs -text
+public/**/*.zip filter=lfs diff=lfs merge=lfs -text
+public/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+public/**/*.jpeg filter=lfs diff=lfs merge=lfs -text

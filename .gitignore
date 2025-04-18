@@ -1,24 +1,46 @@
-# Python virtual environment
+# Dependencies
+node_modules/
 myenv/
 venv/
-env/
 __pycache__/
 *.pyc
-*.pyd
-*.dll
-*.lib
-*.so
-*.dylib
 
-# Node modules
-node_modules/
+# Build outputs
+dist/
+build/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
 
 # IDE files
-.vscode/
 .idea/
+.vscode/
+*.swp
+*.swo
 
-# Environment variables
-.env
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large files (handled by Git LFS)
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+*.zip
+
+# Firebase
+.firebase/
+firebase-debug.log
 
 # Temporary files
 temp/
@@ -29,18 +51,15 @@ report-generator/server/tempCodeRunnerFile.py
 report-generator/server/uploads/
 
 # Large media files
-*.mp4
 *.webp
 *.jpg
 *.png
 
-# Build files
-dist/
-build/
-
 # System files
-.DS_Store
-Thumbs.db
+*.dll
+*.lib
+*.so
+*.dylib
 
 # Specific large files and directories to exclude
 report-generator/server/Encoder/venv/
