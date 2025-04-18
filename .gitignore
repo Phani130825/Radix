@@ -42,5 +42,12 @@ build/
 .DS_Store
 Thumbs.db
 
-# Specific large files
-report-generator/server/Encoder/venv/ 
+# Specific large files and directories to exclude
+report-generator/server/Encoder/venv/
+report-generator/server/Encoder/__pycache__/
+report-generator/server/Encoder/*.pyc
+report-generator/server/Encoder/*.pyd
+report-generator/server/Encoder/*.dll
+report-generator/server/Encoder/*.lib
+report-generator/server/Encoder/*.so
+report-generator/server/Encoder/*.dylib 
