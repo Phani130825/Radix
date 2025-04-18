@@ -2,6 +2,10 @@
 node_modules/
 myenv/
 venv/
+**/venv/
+**/env/
+**/.venv/
+**/.env/
 __pycache__/
 *.pyc
 
@@ -41,6 +45,16 @@ Thumbs.db
 # Firebase
 .firebase/
 firebase-debug.log
+
+# Python virtual environment specific
+*.pyd
+*.dll
+*.lib
+*.so
+*.dylib
+
+# Specific large files and directories to exclude
+report-generator/server/Encoder/venv/
 
 # Temporary files
 temp/
