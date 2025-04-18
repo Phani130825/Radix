@@ -4,6 +4,11 @@ venv/
 env/
 __pycache__/
 *.pyc
+*.pyd
+*.dll
+*.lib
+*.so
+*.dylib
 
 # Node modules
 node_modules/
@@ -35,4 +40,7 @@ build/
 
 # System files
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Specific large files
+report-generator/server/Encoder/venv/ 
