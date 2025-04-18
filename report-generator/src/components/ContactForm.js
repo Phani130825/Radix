@@ -220,7 +220,7 @@ const ContactForm = () => {
         <div className="team-grid-head">
           <div className="team-member">
             <img src="/m1.jpg" alt="Kamal Vijetha" />
-            <h3>Kamal Vijetha Ma'am</h3>
+            <h3>Kamal Vijetha </h3>
             
           </div>
         </div>
@@ -238,7 +238,7 @@ const ContactForm = () => {
             
           </div>
           <div className="team-member">
-            <img src="/t3.png" alt="Sai Vathsal" />
+            <img src="/c1.jpg" alt="Sai Vathsal" />
             <h3>Sai Vathsal </h3>
             
           </div>

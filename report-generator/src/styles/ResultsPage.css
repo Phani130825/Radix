@@ -9,7 +9,7 @@ body {
   
   /* Sticky Header Section */
   .results-header {
-    
+    padding: 100px 20px 0 20px; /* Top padding added to clear navbar */
     top: 0;
     height: 60vh;
     background-size: cover;
@@ -20,8 +20,8 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 20px;
   }
+  
   
   .results-header h1 {
     font-size: 3.5rem;

@@ -1,0 +1,38 @@
+# Python virtual environment
+myenv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Node modules
+node_modules/
+
+# IDE files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Temporary files
+temp/
+*.log
+report-generator/server/tempCodeRunnerFile.py
+
+# Uploads directory
+report-generator/server/uploads/
+
+# Large media files
+*.mp4
+*.webp
+*.jpg
+*.png
+
+# Build files
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db 

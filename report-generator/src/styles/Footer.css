@@ -1,18 +1,24 @@
-/* Footer.css */
 .footer {
-  position: fixed; /* Fixed position */
-  bottom: 0; /* Stick to the bottom of the viewport */
-  width: 100%; /* Span the full width of the page */
-  background-color: #343a40; /* Dark background */
-  color: #ffffff; /* White text */
+  position: relative;
+  width: 100%;
+  background-color: #343a40;
+  color: #ffffff;
   text-align: center;
   padding: 1rem 0;
-  font-size: 1rem; /* Medium text size */
-  z-index: 1000; /* Ensures it stays on top of other content */
+  font-size: 1rem;
+  margin-top: auto; /* Push footer to the bottom */
+  flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
 .footer p {
   margin: 0;
   text-align: center;
   font-weight: 500;
+}
+
+/* Media query for smaller screens */
+@media (max-height: 600px) {
+  .footer {
+    position: relative; /* Keep it relative for smaller screens */
+  }
 }

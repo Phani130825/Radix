@@ -1,14 +1,25 @@
 /* General Navbar Styling */
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; /* Ensures full width across the screen */
+    width: 100%;
+    z-index: 1000;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     background-color: #2d2d2d;
     padding: 2rem;
     color: white;
     font-family: Arial, sans-serif;
-    position: relative; /* Necessary for absolute positioning of the underline */
+
+    box-sizing: border-box; /* Prevents width overflow due to padding */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Optional shadow */
 }
+
 
 /* Logo Styling */
 .logo {

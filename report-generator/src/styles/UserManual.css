@@ -1,9 +1,10 @@
 
 .user-manual-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-  }
+  padding: 120px 20px 20px 20px; /* Added top padding for navbar space */
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
   
   .manual-title {
     text-align: center;

@@ -28,15 +28,17 @@
 
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 import '../styles/Navbar.css';
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
-  const navigate = useNavigate(); // Initialize useNavigate hook
-  const location = useLocation(); // To track the current route
+const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { isLoggedIn, logout } = useAuth();
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Update the login state
-    navigate('/'); // Navigate to Home page
+    logout();
+    navigate('/');
   };
 
   // Function to determine if the current link is active
@@ -45,7 +47,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <nav className="navbar">
       <div className="logo">
-        <img src="/1000056406.png" alt="Description of the image" />
+        <img src="/1000056406.png" alt="Description " />
         <span className="chest">RaD</span>
         <span className="xpert">ix_</span>
       </div>
@@ -66,6 +68,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             <li><Link to="/upload-data" className={isActive('/upload-data')}>Upload Data</Link></li>
             <li><Link to="/view-reports" className={isActive('/view-reports')}>View Reports</Link></li>
             <li><Link to="/contact" className={isActive('/contact')}>Contact Us</Link></li>
+            <li><Link to="/usermanual" className={isActive('/usermanual')}>User Manual</Link></li>
             <li><button onClick={handleLogout}>Logout</button></li>
           </>
         )}

@@ -1,6 +1,7 @@
 import React from "react";
 import '../styles/About.css';
 import videoFile from '../assets/1226.mp4';
+import videoFile1 from '../assets/a1.mp4';
 
 const About = () => {
   return (
@@ -13,27 +14,20 @@ const About = () => {
           <source src={videoFile} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <h3>Cutting-edge Imaging Techniques</h3>
+        <h3>Image analysis using CNN</h3>
         <p>Discover how Radix leverages advanced AI to enhance medical imaging precision.</p>
       </div>
       
       <div className="video-card">
         <video controls>
-          <source src="path/to/video2.mp4" type="video/mp4" />
+          <source src={videoFile1} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <h3>Expert Radiologist Collaboration</h3>
-        <p>Learn about our partnerships with top radiologists for reliable and thorough diagnostics.</p>
+        <h3>For Radiologist </h3>
+        <p>Radiologist can reduce their time spent on analysing reports</p>
       </div>
       
-      <div className="video-card">
-        <video controls>
-          <source src="path/to/video3.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <h3>Innovation in AI for Health</h3>
-        <p>Explore how Radix integrates AI technology to support healthcare professionals worldwide.</p>
-      </div>
+      
     </div>
   );
 };

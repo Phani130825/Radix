@@ -37,7 +37,7 @@ const ResultsPage = () => {
           techniques to analyze and generate detailed reports.
         </p>
       </header>
-
+  
       {/* Content Sections */}
       <div className="results-container">
         {/* Section 1 */}
@@ -46,35 +46,36 @@ const ResultsPage = () => {
             <h2>Radiologist Accuracy</h2>
             <p>
               Our system generates highly accurate reports that align with professional radiologist
-              assessments, ensuring confidence in diagnoses.
+              assessments, ensuring confidence in diagnoses. [Accuracy details will be fetched dynamically]
             </p>
           </div>
         </div>
-
+  
         {/* Section 2 */}
         <div className="results-section">
           <div className="content">
             <h2>Doctor Validation</h2>
             <p>
               Doctors rated our reports for their precision, highlighting that results achieved an
-              accuracy of 95% on average.
+              accuracy of 95% on average. [Accuracy details will be fetched dynamically]
             </p>
           </div>
         </div>
-
+  
         {/* Section 3 */}
         <div className="results-section">
           <div className="content">
             <h2>Interns & Medical Students</h2>
             <p>
               Medical interns evaluated the reports with outstanding results, boosting their
-              confidence in learning and analysis.
+              confidence in learning and analysis. [Top tags and insights will be fetched dynamically]
             </p>
           </div>
         </div>
       </div>
     </div>
   );
+  
 };
 
 export default ResultsPage;
