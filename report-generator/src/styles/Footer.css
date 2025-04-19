@@ -1,3 +1,21 @@
+/* First ensure the body and html take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Ensure the root div (#root or .App) uses flex layout */
+#root, .App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content area should grow to push footer down */
+main {
+  flex: 1 0 auto;
+}
+
 .footer {
   position: relative;
   width: 100%;
@@ -6,7 +24,6 @@
   text-align: center;
   padding: 1rem 0;
   font-size: 1rem;
-  margin-top: auto; /* Push footer to the bottom */
   flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
@@ -19,6 +36,6 @@
 /* Media query for smaller screens */
 @media (max-height: 600px) {
   .footer {
-    position: relative; /* Keep it relative for smaller screens */
+    position: relative;
   }
 }
