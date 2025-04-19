@@ -1,7 +1,5 @@
 import React from "react";
 import '../styles/About.css';
-import videoFile from '../assets/1226.mp4';
-import videoFile1 from '../assets/a1.mp4';
 
 const About = () => {
   return (
@@ -11,7 +9,7 @@ const About = () => {
       
       <div className="video-card">
         <video controls>
-          <source src={videoFile} type="video/mp4" />
+          <source src="/v1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <h3>Image analysis using CNN</h3>
@@ -20,13 +18,12 @@ const About = () => {
       
       <div className="video-card">
         <video controls>
-          <source src={videoFile1} type="video/mp4" />
+          <source src="/v2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <h3>For Radiologist </h3>
         <p>Radiologist can reduce their time spent on analysing reports</p>
       </div>
-      
       
     </div>
   );
