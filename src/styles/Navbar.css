@@ -1,0 +1,133 @@
+/* General Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; /* Ensures full width across the screen */
+    width: 100%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #2d2d2d;
+    padding: 2rem;
+    color: white;
+    font-family: Arial, sans-serif;
+
+    box-sizing: border-box; /* Prevents width overflow due to padding */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Optional shadow */
+}
+
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.logo .chest {
+    color: #d3d3d3; /* Light Gray */
+    margin-right: 0.2rem;
+}
+
+.logo .xpert {
+    color: #d32f2f; /* Red */
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: right;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    flex: 1; /* Allows the links to take equal space */
+    justify-content: right; /* Centers the links horizontally */
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center; /* Centers the text vertically */
+    position: relative; /* Necessary for underline position */
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+    padding-bottom: 0.5rem; /* Space for the underline effect */
+}
+
+.nav-links li a:hover {
+    color: #bdbdbd; /* Light Hover Effect */
+}
+
+/* Underline Effect */
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background-color: #fff; /* Red color */
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+    width: 100%; /* Full width underline on hover */
+}
+
+/* Active Link Styling (Optional, if you want to visually indicate the current page) */
+.nav-links li a.active::after {
+    width: 100%; /* Full width underline on active */
+}
+
+/* Try Now Button */
+.try-now-btn a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    color: #8b0000; /* Dark Red */
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.try-now-btn a:hover {
+    background-color: #d32f2f;
+    color: white;
+}
+
+.logo img {
+    width: 2rem; /* Adjust the size to match the height of the text */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 0.5rem; /* Add spacing between the icon and the text */
+    vertical-align: middle; /* Align the icon with the text */
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links li a {
+        font-size: 1rem;
+    }
+
+    .try-now-btn a {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}

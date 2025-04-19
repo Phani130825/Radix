@@ -1,0 +1,266 @@
+/* Contact Form Container */
+.contact-form-container {
+    background: #f9f9f9;
+    padding: 50px 50px;
+    margin: 40px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Hero Section with Overlay Text */
+  .hero-section {
+    position: relative;
+    /*background-image: url("./../assets/hero-background.png");*/ /* Replace with actual path */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 60px 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .overlay-text {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .overlay-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .overlay-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  /* Small Logo Adjustment */
+  .small-logo {
+    display: block;
+    margin: 20px auto 0;
+    width: 120px; /* Adjusted logo size */
+    height: auto;
+  }
+  
+  /* Form Header */
+  .form-header h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .form-header p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  /* Contact Form */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #444;
+    font-weight: 600;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #ff4d4f;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 77, 79, 0.5);
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  
+  /* Submit Button */
+  .submit-button {
+    background: linear-gradient(to right, #ff4d4f, #ff6a6b);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .submit-button:hover {
+    background: linear-gradient(to right, #e84345, #ff4d4f);
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .contact-form-container {
+      padding: 30px 15px;
+    }
+  
+    .overlay-text h1 {
+      font-size: 2rem;
+    }
+  
+    .overlay-text p {
+      font-size: 0.9rem;
+    }
+  
+    .small-logo {
+      width: 80px;
+    }
+  }
+  .status-message {
+    margin-top: 10px;
+    color: green;
+  }
+  
+  .status-message.error {
+    color: red;
+  }
+  
+/* Team Section */
+.team-section {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.team-section h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.team-grid {
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 30px;
+  justify-items: center; /* Center team members horizontally */
+  flex-wrap: wrap;
+}
+
+/* Team Member Styling */
+.team-member {
+  text-align: center;
+  background: #fff;
+  width: 200px; /* Fixed width to maintain square box */
+  height: 200px; /* Fixed height to maintain square box */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* To position expanded content */
+  overflow: hidden; /* Ensures content doesn't overflow the box */
+}
+
+.team-member img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #ff4d4f;
+}
+
+.team-member h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #333;
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Prevent text overflow */
+}
+
+.team-member p {
+  font-size: 0.9rem;
+  color: #666;
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Prevent text overflow */
+}
+
+/* Hover/Expand to Show Full Text */
+.team-member:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.team-member.expanded {
+  height: auto; /* Allow expansion */
+  max-height: none; /* Remove fixed height on expansion */
+}
+
+.team-member.expanded .team-member-text {
+  white-space: normal; /* Allow text wrapping */
+  text-overflow: clip; /* No more ellipsis */
+}
+
+/* Optional: Button to toggle expansion (if needed) */
+.expand-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff4d4f;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: none; /* Hidden by default */
+}
+
+.team-member:hover .expand-btn {
+  display: block; /* Show on hover */
+}
+
+.team-member.expanded .expand-btn {
+  display: none; /* Hide when expanded */
+}
+
+
+.team-section-head {
+  margin-top: 50px;
+  text-align: center;
+  align-content: center;
+}
+
+.team-section-head h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.team-grid-head{
+  align-items: center;
+  margin-left: 280px;
+}
+

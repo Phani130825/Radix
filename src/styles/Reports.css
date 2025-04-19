@@ -1,0 +1,17 @@
+.reports-page {
+    padding: 2rem;
+    background-color: #ffffff;
+  }
+  
+  .reports-page h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+  
+  .reports-page p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #7f8c8d;
+  }
+  
