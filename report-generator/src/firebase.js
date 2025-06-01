@@ -33,22 +33,46 @@ const firebaseConfig = {
   authDomain: "radix-3abe9.firebaseapp.com",
   databaseURL: "https://radix-3abe9-default-rtdb.firebaseio.com",
   projectId: "radix-3abe9",
-  storageBucket: "radix-3abe9.firebasestorage.app",
+  storageBucket: "radix-3abe9.appspot.com",
   messagingSenderId: "191442213053",
   appId: "1:191442213053:web:cec8dcddc7984276c3ffd4",
   measurementId: "G-1QQPBLD2BT"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+let app;
+let db;
+let storage;
+let auth;
 
-// Initialize Firestore
-const db = getFirestore(app);
+try {
+  // Initialize Firebase
+  app = initializeApp(firebaseConfig);
+  console.log("Firebase app initialized successfully");
 
-// Initialize Storage
-const storage = getStorage(app);
+  // Initialize Firestore
+  db = getFirestore(app);
+  console.log("Firestore initialized successfully");
 
-// Initialize Authentication
-const auth = getAuth(app);
+  // Initialize Storage
+  storage = getStorage(app);
+  console.log("Storage initialized successfully");
 
-export { db, storage, auth };
+  // Initialize Authentication
+  auth = getAuth(app);
+  console.log("Authentication initialized successfully");
+} catch (error) {
+  console.error("Error initializing Firebase:", error);
+  throw error;
+}
+
+// Configure CORS for Firebase Storage
+const corsConfig = {
+  origin: ["http://localhost:3000", "https://radix-3abe9.web.app"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Content-Length", "Content-Range", "Content-Disposition"],
+  credentials: true,
+  maxAgeSeconds: 3600
+};
+
+// Export initialized services
+export { db, storage, auth, corsConfig };

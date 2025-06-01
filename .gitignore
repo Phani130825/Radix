@@ -1,60 +1,63 @@
 # Dependencies
-node_modules/
-myenv/
-venv/
-**/venv/
-**/env/
-**/.venv/
-**/.env/
-__pycache__/
-*.pyc
+/node_modules
+/.pnp
+.pnp.js
 
-# Build outputs
-dist/
-build/
-*.log
+# Testing
+/coverage
+
+# Production
+/build
 
 # Environment files
 .env
 .env.local
-.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# IDE files
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+firebase-debug.log*
+
+# IDE and Editor files
 .idea/
 .vscode/
 *.swp
 *.swo
-
-# OS files
 .DS_Store
-Thumbs.db
 
-# Large files (handled by Git LFS)
-*.pdf
-*.doc
-*.docx
-*.xls
-*.xlsx
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.mp4
-*.zip
+# Virtual Environment
+myenv/
+venv/
+env/
+ENV/
+**/venv/
+**/env/
+**/.venv/
+**/.env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyd
+*.dll
+*.lib
 
 # Firebase
 .firebase/
 firebase-debug.log
+firebase-debug.*.log
+functions/
 
-# Python virtual environment specific
-*.pyd
-*.dll
-*.lib
-*.so
-*.dylib
-
-# Specific large files and directories to exclude
-report-generator/server/Encoder/venv/
+# Misc
+.DS_Store
+Thumbs.db
 
 # Temporary files
 temp/
@@ -63,11 +66,6 @@ report-generator/server/tempCodeRunnerFile.py
 
 # Uploads directory
 report-generator/server/uploads/
-
-# Large media files
-*.webp
-*.jpg
-*.png
 
 # System files
 *.dll
@@ -83,4 +81,25 @@ report-generator/server/Encoder/*.pyd
 report-generator/server/Encoder/*.dll
 report-generator/server/Encoder/*.lib
 report-generator/server/Encoder/*.so
-report-generator/server/Encoder/*.dylib 
+report-generator/server/Encoder/*.dylib
+
+# Nested report-generator directory
+report-generator/
+
+# Large files and caches
+*.cache
+*.tmp
+*.temp
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.mov
+*.mp4
+*.mp3
+*.wav
+*.pdf
+*.zip
+*.rar
+*.7z 

@@ -1,21 +1,20 @@
-import React, { useState } from "react";
-import { db, storage } from '../firebase';
+import React, { useState, useEffect } from "react";
+import { db } from '../firebase';
 
 import "../styles/UploadData.css";
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import { doc, getDoc, setDoc, collection ,getDocs} from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore';
 import CustomDialog from '../components/CustomDialog';
 
 const UploadData = ({ email }) => {
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [stage, setStage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [prediction, setPrediction] = useState(null);
+  const [predictions, setPredictions] = useState([]);
   const [reportId, setReportId] = useState("");
   const [role, setRole] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [userName, setUserName] = useState(null);
   const location = useLocation();
 
   const [dialog, setDialog] = useState({ open: false, title: '', message: '' });
@@ -48,62 +47,136 @@ const UploadData = ({ email }) => {
     fetchRole();
   }, [email, location.state]);
 
-  const [userName, setUserName] = useState(null);
-
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFiles = Array.from(e.target.files);
+    
+    // Limit to 1 file
+    if (selectedFiles.length > 1) {
+      showDialog("Warning", "Please select only one file at a time.");
+      return;
+    }
+
+    const validFiles = selectedFiles.filter((file) => {
+      const isValidType = file.type.startsWith("image/");
+      if (!isValidType) {
+        showDialog("Error", `${file.name} is not a valid image file.`);
+        return false;
+      }
+      return true;
+    });
+
+    setFiles(validFiles);
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const droppedFile = e.dataTransfer.files[0];
-    setFile(droppedFile);
+    const droppedFiles = Array.from(e.dataTransfer.files);
+
+    if (droppedFiles.length > 0) {
+      // Check if user is doctor and validate number of files
+      if (role === "Doctor" && droppedFiles.length > 4) {
+        showDialog("Error", "Maximum 4 images allowed for doctors.");
+        return;
+      }
+
+      // Validate each file
+      const validFiles = droppedFiles.filter(file => {
+        if (!file.type.startsWith('image/')) {
+          showDialog("Error", "Please drop only image files.");
+          return false;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          showDialog("Error", "Each file should be less than 5MB.");
+          return false;
+        }
+        return true;
+      });
+
+      setFiles(validFiles);
+    }
   };
 
   const handleSubmit = async () => {
-    if (file) {
-      setLoading(true);
+    if (files.length === 0) {
+      showDialog("Warning", "Please upload a file.");
+      return;
+    }
+
+    setLoading(true);
+    const predictionsArray = [];
+
+    try {
+      // Check if server is available with timeout
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
+        const serverCheck = await fetch("http://localhost:5002/health", {
+          method: "GET",
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (!serverCheck.ok) {
+          throw new Error("Server is not responding properly");
+        }
+      } catch (error) {
+        if (error.name === 'AbortError') {
+          showDialog("Error", "Server connection timed out. Please make sure the server is running.");
+        } else {
+          showDialog("Error", "Cannot connect to the server. Please make sure the server is running at http://localhost:5002");
+        }
+        setLoading(false);
+        return;
+      }
+
+      const file = files[0]; // Since we only allow one file now
       const formData = new FormData();
       formData.append("file", file);
       const headers = { 'email': email };
 
-      try {
-        const response = await fetch("http://localhost:5002/upload", {
-          method: "POST",
-          body: formData,
-          headers: headers,
-        });
+      // Add timeout to the upload request
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout for upload
 
-        const data = await response.json();
-        console.log("Server Response:", data);
+      const response = await fetch("http://localhost:5002/upload", {
+        method: "POST",
+        body: formData,
+        headers: headers,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
 
-        if (response.ok) {
-          if (data.error) {
-            showDialog("Error", data.error);
-          } else {
-            console.log("Prediction Data:", data);
-            setPrediction({ 
-              class: data.prediction.class, 
-              confidence: data.prediction.confidence,
-              tags: data.tags 
-            });
-            setStage(2);
-          }
+      const data = await response.json();
+      console.log("Server Response:", data);
+
+      if (response.ok) {
+        if (data.error) {
+          showDialog("Error", data.error);
         } else {
-          const errorData = await response.json();
-          showDialog("Error", errorData.error || "Failed to process the file.");
+          predictionsArray.push({
+            prediction: data.prediction,
+            tags: data.tags || [],
+            status: data.status,
+            file: file
+          });
+          setPredictions(predictionsArray);
+          setStage(2);
         }
-      } catch (error) {
-        console.error("Error:", error);
-        showDialog("Error", "An error occurred during file upload.");
-      } finally {
-        setLoading(false);
+      } else {
+        showDialog("Error", data.error || "Failed to process the file.");
       }
-    } else {
-      showDialog("Warning", "Please upload a file first.");
+    } catch (error) {
+      console.error("Error:", error);
+      if (error.name === 'AbortError') {
+        showDialog("Error", "Upload timed out. Please try again with a smaller file or check your internet connection.");
+      } else {
+        showDialog("Error", "An error occurred during file upload. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
-
 
   const formatTags = (tags) => {
     if (Array.isArray(tags)) {
@@ -117,41 +190,19 @@ const UploadData = ({ email }) => {
     }
     return tags;
   };
-  
+
   const formatPrediction = (prediction) => {
     return {
       class: prediction.class ? String(prediction.class) : "N/A",  // Ensure class is a string
       confidence: prediction.confidence ? Number(prediction.confidence).toFixed(2) : "N/A",  // Ensure confidence is a number
     };
   };
-  
+
   const handlePredictionDisplay = (prediction) => {
     if (prediction) {
       const formattedPrediction = formatPrediction(prediction);
-      setPrediction(formattedPrediction);
     }
   };
-
-  // Upload image to Firebase Storage and get the download URL
-  const uploadImageToFirebase = async (file, reportId) => {
-    try {
-      // Create a reference to the file location in Firebase Storage
-      const storageRef = ref(storage, `reports/${email}/${reportId}/${file.name}`);
-      
-      // Upload the file
-      await uploadBytes(storageRef, file);
-      
-      // Get the download URL
-      const downloadURL = await getDownloadURL(storageRef);
-      console.log("File uploaded successfully, URL:", downloadURL);
-      
-      return downloadURL;
-    } catch (error) {
-      console.error("Error uploading file to Firebase Storage:", error);
-      throw error;
-    }
-  };
-// ... existing code ...
 
   // Function to generate a unique report ID
   const generateUniqueReportId = async () => {
@@ -159,10 +210,10 @@ const UploadData = ({ email }) => {
       // Get all users' report collections
       const usersRef = collection(db, 'login');
       const usersSnapshot = await getDocs(usersRef);
-      
+
       // Collect all existing report IDs
       const existingIds = new Set();
-      
+
       // For each user, get their reports
       for (const userDoc of usersSnapshot.docs) {
         const reportsRef = collection(db, 'login', userDoc.id, 'report');
@@ -189,42 +240,153 @@ const UploadData = ({ email }) => {
     }
   };
 
+  // Function to convert file to base64
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  // Function to compress image before converting to base64
+  const compressImage = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 800;
+          const MAX_HEIGHT = 600;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        img.onerror = reject;
+      };
+      reader.onerror = reject;
+    });
+  };
+
   const handleGenerateReport = async () => {
     if (!email) {
       showDialog("Error", "User email not found. Please log in again.");
       return;
     }
 
+    setLoading(true);
     try {
       // Generate a unique report ID
-      const uniqueReportId = await generateUniqueReportId();
-      setReportId(uniqueReportId);
-      setStage(3);
+      const newReportId = await generateUniqueReportId();
+      setReportId(newReportId);
 
-      // Upload the image to Firebase Storage
-      const imageDownloadURL = await uploadImageToFirebase(file, uniqueReportId);
-      setImageUrl(imageDownloadURL);
-      
-      const reportCollectionRef = collection(db, 'login', email, 'report');
-      const reportDocRef = doc(reportCollectionRef, uniqueReportId);
+      // Get the file
+      const file = files[0];
+      if (!file) {
+        throw new Error("No file selected for upload");
+      }
 
-      const formattedTags = formatTags(prediction.tags);
-      const newReport = {
-        image: imageDownloadURL,
-        ...(role === "Doctor"
-          ? { tags: formattedTags }
-          : { class: prediction.class, confidence: prediction.confidence }),
+      // Compress and convert image to base64
+      console.log("Converting image to base64...");
+      const compressedImage = await compressImage(file);
+      console.log("Image converted successfully");
+
+      // Prepare report data
+      const reportData = {
+        id: newReportId,
+        generatedBy: userName || email,
+        status: "Completed",
+        image: compressedImage, // Store base64 string directly
+        captions: [predictions[0].prediction],
+        tags: predictions[0].tags || [],
+        timestamp: new Date().toISOString(),
+        userType: role
       };
 
-      await setDoc(reportDocRef, newReport);
-      showDialog("Success", "Report stored successfully!");
-    } catch (err) {
-      console.error('Error storing the report in Firestore:', err);
-      showDialog("Error", 'An error occurred while storing the report. Please try again.');
+      // Save report to Firestore
+      console.log("Saving report to Firestore...");
+      const reportRef = doc(db, "login", email, "report", newReportId);
+      await setDoc(reportRef, reportData);
+
+      console.log("Report saved successfully");
+      setImageUrls([compressedImage]); // Use base64 string directly
+      setStage(3);
+    } catch (error) {
+      console.error("Error generating report:", error);
+      showDialog("Error", `Failed to generate report: ${error.message}`);
+      setStage(2);
+    } finally {
+      setLoading(false);
     }
   };
 
-// ... rest of the existing code ...
+  const handleExport = async () => {
+    try {
+      if (!imageUrls || imageUrls.length === 0 || !imageUrls[0]) {
+        showDialog("Error", "No image URL found. Please try generating the report again.");
+        return;
+      }
+
+      // Verify the image URL is still accessible
+      try {
+        const response = await fetch(imageUrls[0], { method: 'HEAD' });
+        if (!response.ok) {
+          throw new Error("Image URL is no longer accessible");
+        }
+      } catch (urlError) {
+        console.error("Error verifying image URL:", urlError);
+        showDialog("Error", "Image URL is no longer accessible. Please try generating the report again.");
+        return;
+      }
+
+      const reportRef = doc(db, 'login', email, 'report', reportId);
+
+      // Update the existing report with final data
+      const reportData = {
+        image: imageUrls[0],
+        captions: predictions.map(p => p.prediction),
+        status: "Completed",
+        timestamp: new Date().toISOString(),
+        generatedBy: userName || email,
+        tags: predictions.flatMap(p => p.tags || [])
+      };
+
+      await setDoc(reportRef, reportData);
+      showDialog("Success", "Report Exported!");
+
+      // Reset the form
+      setFiles([]);
+      setStage(1);
+      setPredictions([]);
+      setReportId("");
+      setImageUrls([]);
+    } catch (err) {
+      console.error('Error exporting report:', err);
+      showDialog("Error", 'Failed to export report. Please try again.');
+    }
+  };
+
   const preventDefault = (e) => e.preventDefault();
 
   return (
@@ -248,7 +410,7 @@ const UploadData = ({ email }) => {
       <div className="stage-bar">
         <div className={`stage ${stage >= 1 ? "active" : ""}`}>
           <div className="circle">1</div>
-          <span>Upload Image</span>
+          <span>Upload Image{role === "Doctor" ? "s" : ""}</span>
         </div>
         <div className={`stage ${stage >= 2 ? "active" : ""}`}>
           <div className="circle">2</div>
@@ -269,18 +431,29 @@ const UploadData = ({ email }) => {
             onDragOver={preventDefault}
             onDragEnter={preventDefault}
           >
-            <h3> Drop Your Image Here</h3>
+            <h3>Drop Your Image{role === "Doctor" ? "s" : ""} Here</h3>
             <p>or</p>
-            <input type="file" onChange={handleFileChange} />
-            {file && (
+            <input
+              type="file"
+              onChange={handleFileChange}
+              multiple={role === "Doctor"}
+              accept="image/*"
+            />
+            {files.length > 0 && (
               <div style={{ marginTop: "20px" }}>
-                <h4>Selected Image:</h4>
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt="Selected"
-                  width="200px"
-                  style={{ border: "1px solid #ddd", marginBottom: "20px" }}
-                />
+                <h4>Selected Image{files.length > 1 ? "s" : ""}:</h4>
+                <div className="selected-images">
+                  {files.map((file, index) => (
+                    <div key={index} className="image-preview">
+                      <img
+                        src={URL.createObjectURL(file)}
+                        alt={`Selected ${index + 1}`}
+                        width="200px"
+                        style={{ border: "1px solid #ddd", marginBottom: "20px" }}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
             <button onClick={handleSubmit} disabled={loading}>
@@ -312,33 +485,29 @@ const UploadData = ({ email }) => {
         </div>
       )}
 
-      {stage === 2 && prediction && (
+      {stage === 2 && predictions.length > 0 && (
         <div className="report-stage">
-          <h3>Prediction Results</h3>
-          {role === "Doctor" ? (
-            prediction.tags && Array.isArray(prediction.tags) ? (
-              <ul>
-                {prediction.tags.map((tag, index) => (
-                  <li key={index}>{tag}</li>
-                ))}
-              </ul>
-            ) : (
-              <p>No tags available.</p>
-            )
-          ) : (
-            <>
-              <p>Class: {prediction.class || "N/A"}</p>
-              <p>Confidence: {prediction.confidence || "N/A"}</p>
-              <p>
-              You have been diagnosed with viral pneumonia. It is important to follow these guidelines for recovery:
-
-              <strong>Rest and Hydration:</strong> Ensure adequate rest and drink plenty of fluids to stay hydrated. This helps your body fight the infection.
-
-              <strong>Monitor symptoms</strong> Watch for worsening symptoms such as high fever, difficulty breathing, or chest pain. Seek immediate medical attention if these occur.
-              </p>
-            </>
-          )}
-
+          <h3>Analysis Results</h3>
+          {predictions.map((prediction, index) => (
+            <div key={index} className="prediction-section">
+              <h4>Image {index + 1}</h4>
+              <h4>Status: {prediction.status}</h4>
+              <div className="prediction-content">
+                <h4>Analysis:</h4>
+                <p>{prediction.prediction}</p>
+              </div>
+              {role === "Doctor" && prediction.tags && prediction.tags.length > 0 && (
+                <div className="tags-section">
+                  <h4>Tags:</h4>
+                  <ul>
+                    {prediction.tags.map((tag, tagIndex) => (
+                      <li key={tagIndex}>{tag}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
           <button onClick={handleGenerateReport}>Generate Report</button>
         </div>
       )}
@@ -349,50 +518,15 @@ const UploadData = ({ email }) => {
           <p>
             Report ID: <strong>{reportId}</strong>
           </p>
-          {imageUrl ? (
+          {imageUrls[0] && (
             <img
-              src={imageUrl}
+              src={imageUrls[0]}
               alt="Uploaded"
-              width="200px"
-              style={{ border: "1px solid #ddd", marginTop: "20px", marginBottom: "25px" }}
-            />
-          ) : (
-            <img
-              src={URL.createObjectURL(file)}
-              alt="Uploaded"
-              width="200px"
+              width="400px"
               style={{ border: "1px solid #ddd", marginTop: "20px", marginBottom: "25px" }}
             />
           )}
-          <button 
-            onClick={async () => {
-              try {
-                const reportCollectionRef = collection(db, 'login', email, 'report');
-                const reportDocRef = doc(reportCollectionRef, reportId);
-
-                const reportData = {
-                  class: prediction.class,
-                  confidence: prediction.confidence,
-                  image: URL.createObjectURL(file)
-                };
-
-                await setDoc(reportDocRef, reportData);
-                showDialog("Success", "Report Exported!");
-                
-                // Reset the form
-                setFile(null);
-                setStage(1);
-                setPrediction(null);
-                setReportId("");
-                setImageUrl(null);
-              } catch (err) {
-                console.error('Error exporting report:', err);
-                showDialog("Error", 'Failed to export report. Please try again.');
-              }
-            }}
-          >
-            Export
-          </button>
+          <button onClick={handleExport}>Export</button>
         </div>
       )}
     </div>
