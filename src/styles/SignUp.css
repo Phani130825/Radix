@@ -1,0 +1,294 @@
+/* Base styles for the container */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: calc(100vh - 80px); /* Subtract navbar height to prevent cutoff */
+  margin-top: 160px;           /* Push the container below the navbar */
+  
+  background-color: #f4f4f4;
+  padding: 40px;
+  margin-left: 100px;
+  size: 50%;
+  margin-bottom: 130px;
+}
+
+
+.auth-container h2 {
+  font-size: 1.7rem;
+  color: #333;
+  margin-bottom: 2rem;
+  margin-right: 90px;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: left;
+  margin-right: 100px;
+  padding-right: 70px;
+}
+
+.auth-form .error {
+  color: #ff4d4d;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: #555;
+  display: block;
+  margin-bottom: 0.5rem;
+  padding-right: 40px;
+  margin-right: auto;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.2rem;
+}
+
+.radio-group label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.radio-group input {
+  margin-right: 0.5rem;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.toggle-auth {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.toggle-auth:hover {
+  text-decoration: underline;
+}
+
+.questionnaire {
+  max-height: 150px; /* Set a specific height for the container */
+  overflow-y: auto;  /* Enables vertical scrolling */
+  padding-right: 10px; /* Adds space for the scrollbar */
+  border: 1px solid #ccc; /* Optional: adds a border to distinguish the container */
+}
+
+.questionnaire-heading {
+  margin-bottom: 20px; 
+  padding: 20px 20px;
+  padding-left: 20px;
+  text-align: center;/* Adds spacing between the heading and the form */
+}
+
+.form-group{
+  padding-left: 0px;
+}
+.form-group #p{
+  text-align: center;
+}
+
+label{
+  padding-left: 25px;
+}
+
+/* Stylish scrollbar for form-group and questionnaire */
+.form-group,
+.questionnaire {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #007bff #f4f4f4; /* For Firefox */
+}
+
+.form-group::-webkit-scrollbar,
+.questionnaire::-webkit-scrollbar {
+  width: 7px;
+}
+
+.form-group::-webkit-scrollbar-thumb,
+.questionnaire::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Thumb color */
+  border-radius: 4px; /* Rounded corners */
+  border: 2px solid #f4f4f4; /* Adds space between the thumb and track */
+}
+
+.form-group::-webkit-scrollbar-track,
+.questionnaire::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Track background color */
+  border-radius: 4px; /* Rounded corners */
+  border: 1px solid #ccc; /* Optional: adds a border for a posh look */
+}
+
+.form-group::-webkit-scrollbar-thumb:hover,
+.questionnaire::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.scrollable-container {
+  max-height: 100px; /* Adjust height as needed */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  margin-bottom: 1.5rem; /* Space below the container */
+  border: 1px solid #ccc; /* Optional: adds a border for clarity */
+  padding: 10px; /* Adds padding for better appearance */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #007bff #f4f4f4; /* For Firefox */
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Thumb color */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Track background color */
+}
+
+/* Password strength indicator styles */
+.password-strength {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.strength-indicator {
+  height: 5px;
+  width: 100px;
+  background-color: #ddd;
+  border-radius: 3px;
+  margin-right: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.strength-indicator::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.strength-0::after {
+  width: 0%;
+  background-color: #ff4d4d;
+}
+
+.strength-1::after {
+  width: 20%;
+  background-color: #ff4d4d;
+}
+
+.strength-2::after {
+  width: 40%;
+  background-color: #ffa64d;
+}
+
+.strength-3::after {
+  width: 60%;
+  background-color: #ffa64d;
+}
+
+.strength-4::after {
+  width: 80%;
+  background-color: #4dff4d;
+}
+
+.strength-5::after {
+  width: 100%;
+  background-color: #4dff4d;
+}
+
+.strength-message {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* OTP Verification Styles */
+.otp-verification {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.otp-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.otp-actions button {
+  flex: 1;
+}
+
+.otp-info {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: #007bff;
+  background-color: #ffffff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #f0f7ff;
+}
+
+.btn-secondary:disabled {
+  color: #999;
+  border-color: #ccc;
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
