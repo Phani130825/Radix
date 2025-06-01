@@ -91,16 +91,25 @@ report-generator/
 *.cache
 *.tmp
 *.temp
+
+# Ignore large media and binary files
+*.mp4
+*.wmv
 *.jpg
 *.jpeg
 *.png
-*.gif
+*.webp
 *.ico
+*.gif
 *.mov
-*.mp4
 *.mp3
 *.wav
 *.pdf
 *.zip
 *.rar
 *.7z
+
+# Ignore uploads and assets directories
+report-generator/server/uploads/
+report-generator/src/assets/
+src/assets/
